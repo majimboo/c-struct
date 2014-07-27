@@ -1,6 +1,6 @@
 {
   "name": "c-struct",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A C-struct library to manage binary structures with Node.JS",
   "main": "index.js",
   "directories": {
@@ -15,6 +15,8 @@
     "binary",
     "pack",
     "unpack",
+    "parse",
+    "serialize",
     "endianness",
     "buffer",
     "c",

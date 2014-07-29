@@ -1,7 +1,7 @@
 var _ = require('../');
 
 var playerSchema = new _.Schema({
-  id: _.type.uint16,
+  id: _.type.u16(8),
   name: _.type.string(16),
   hp: _.type.uint24,
   exp: _.type.uint32,

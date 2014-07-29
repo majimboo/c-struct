@@ -15,6 +15,7 @@ What can it do?
 * Schema based packing and unpacking.
 * Unpack from buffer to object.
 * Pack from object to buffer.
+* Pack with default value if key isn't specified.
 
 More
 ----
@@ -26,12 +27,12 @@ Installation
 
     npm install c-struct --save
 
-> Execute `$ node examples/` to see examples.
+> Execute `$ node examples/` to see the examples.
 
 Usage
 -----
 
-### Unpacking ###
+#### Unpacking ####
 
     var _ = require('c-struct');
 
@@ -86,7 +87,7 @@ Usage
       hash: 99999999,
     });
 
-### Packing ###
+#### Packing ####
 
     var _ = require('c-struct');
 
@@ -116,6 +117,27 @@ Usage
     // buffer to object | this can be on another file
     var obj = _.unpackSync('Player', BUFFER_HERE);
 
+
+API
+---
+
+Currently only unsigned values in little endian are supported
+
+    _.type.uint8    // unsigned char
+    _.type.uint16   // unsigned short
+    _.type.uint24
+    _.type.uint32   // unsigned long
+    _.type.uint40
+    _.type.uint48
+
+You can also specify default values
+
+    _.type.u8(9999) // default value 9999
+    _.type.u16(999) // default value 999
+    _.type.u24(888) // default value 888
+    _.type.u32(777) // default value 777
+    _.type.u40(666) // default value 666
+    _.type.u48(555) // default value 555
 
 Configurations
 ----

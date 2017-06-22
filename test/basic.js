@@ -1,9 +1,10 @@
-var should = require('chai').should();
-var expect = require('chai').expect;
+var chai = require('chai');
+var should = chai.should();
+var expect = chai.expect;
 var _ = require('../');
 
-describe('#c-struct', function() {
-  it('should pack object to buffer with default values', function(done) {
+describe('#c-struct', function () {
+  it('should pack object to buffer with default values', function (done) {
 
     var playerSchema = new _.Schema({
       id: _.type.u16(5),
@@ -59,7 +60,7 @@ describe('#c-struct', function() {
     done();
   });
 
-  it('should unpack buffer to object', function(done) {
+  it('should unpack buffer to object', function (done) {
 
     var playerSchema = new _.Schema({
       id: _.type.uint16,
@@ -124,5 +125,37 @@ describe('#c-struct', function() {
     done();
   });
 
+  it('should unpack array objects', function () {
+    const schema = new _.Schema({
+      type: _.type.string(4),
+      version: _.type.uint8,
+      id: _.type.string(16),
+      count: _.type.uint8,
+      collection: [{
+        id: _.type.string(16),
+        sequenceNumber: _.type.uint16
+      }]
+    });
+    _.register('Schema', schema);
 
+    let data = {
+      type: 'abcd',
+      version: 1,
+      id: 'abcdabcdabcdabcd',
+      count: 3,
+      collection: [{
+        id: 'efghefghefghefgh',
+        sequenceNumber: 1,
+      }, {
+        id: 'hijkhijkhijkhijk',
+        sequenceNumber: 2,
+      }, {
+        id: 'abcdefghijklmnop',
+        sequenceNumber: 3,
+      }]
+    };
+    const packedData = _.packSync('Schema', data);
+    const unpackedData = _.unpackSync('Schema', packedData);
+    expect(unpackedData).to.deep.equal(data);
+  });
 });

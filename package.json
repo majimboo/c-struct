@@ -1,6 +1,6 @@
 {
   "name": "c-struct",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A C-struct library to manage binary structures with Node.JS",
   "main": "index.js",
   "directories": {
@@ -26,7 +26,7 @@
   "author": "Majid Arif Siddiqui <me@majidarif.com> (http://blog.majidarif.com/)",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.0.2",
-    "mocha": "^3.4.2"
+    "chai": "^4.1.2",
+    "mocha": "^5.0.4"
   }
 }

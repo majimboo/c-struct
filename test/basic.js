@@ -60,6 +60,34 @@ describe('#c-struct', function () {
     done();
   });
 
+  it ('uint16b', () => {
+    const orig = 21;
+
+    let data = _.packers['uint16l'](orig);
+    let buf = Buffer.from(data);
+    buf.toString('hex').should.equal('1500');
+
+    data = _.packers['uint16b'](orig);
+    buf = Buffer.from(data);
+    buf.toString('hex').should.equal('0015');
+    const actual = _.unpackers['uint16b']({ offset: 0 },buf);
+    actual.should.equal(orig);
+  });
+
+  it ('uint32b', () => {
+    const orig = 21;
+
+    let data = _.packers['uint32l'](orig);
+    let buf = Buffer.from(data);
+    buf.toString('hex').should.equal('15000000');
+
+    data = _.packers['uint32b'](orig);
+    buf = Buffer.from(data);
+    buf.toString('hex').should.equal('00000015');
+    const actual = _.unpackers['uint32b']({ offset: 0 },buf);
+    actual.should.equal(orig);
+  });
+
   it('should unpack buffer to object', function (done) {
 
     var playerSchema = new _.Schema({

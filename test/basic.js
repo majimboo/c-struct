@@ -60,7 +60,7 @@ describe('#c-struct', function () {
     done();
   });
 
-  it ('uint16b', () => {
+  it ('uint16', () => {
     const orig = 21;
 
     let data = _.packers['uint16l'](orig);
@@ -74,7 +74,21 @@ describe('#c-struct', function () {
     actual.should.equal(orig);
   });
 
-  it ('uint32b', () => {
+  it ('uint24', () => {
+    const orig = 21;
+
+    let data = _.packers['uint24l'](orig);
+    let buf = Buffer.from(data);
+    buf.toString('hex').should.equal('150000');
+
+    data = _.packers['uint24b'](orig);
+    buf = Buffer.from(data);
+    buf.toString('hex').should.equal('000015');
+    const actual = _.unpackers['uint24b']({ offset: 0 },buf);
+    actual.should.equal(orig);
+  });
+
+  it ('uint32', () => {
     const orig = 21;
 
     let data = _.packers['uint32l'](orig);
@@ -85,6 +99,62 @@ describe('#c-struct', function () {
     buf = Buffer.from(data);
     buf.toString('hex').should.equal('00000015');
     const actual = _.unpackers['uint32b']({ offset: 0 },buf);
+    actual.should.equal(orig);
+  });
+
+  it ('uint40', () => {
+    const orig = 21;
+
+    let data = _.packers['uint40l'](orig);
+    let buf = Buffer.from(data);
+    buf.toString('hex').should.equal('1500000000');
+
+    data = _.packers['uint40b'](orig);
+    buf = Buffer.from(data);
+    buf.toString('hex').should.equal('0000000015');
+    const actual = _.unpackers['uint40b']({ offset: 0 },buf);
+    actual.should.equal(orig);
+  });
+
+  it ('uint48', () => {
+    const orig = 21;
+
+    let data = _.packers['uint48l'](orig);
+    let buf = Buffer.from(data);
+    buf.toString('hex').should.equal('150000000000');
+
+    data = _.packers['uint48b'](orig);
+    buf = Buffer.from(data);
+    buf.toString('hex').should.equal('000000000015');
+    const actual = _.unpackers['uint48b']({ offset: 0 },buf);
+    actual.should.equal(orig);
+  });
+
+  it ('uint56', () => {
+    const orig = 21;
+
+    let data = _.packers['uint56l'](orig);
+    let buf = Buffer.from(data);
+    buf.toString('hex').should.equal('15000000000000');
+
+    data = _.packers['uint56b'](orig);
+    buf = Buffer.from(data);
+    buf.toString('hex').should.equal('00000000000015');
+    const actual = _.unpackers['uint56b']({ offset: 0 },buf);
+    actual.should.equal(orig);
+  });
+
+  it ('uint64', () => {
+    const orig = 21;
+
+    let data = _.packers['uint64l'](orig);
+    let buf = Buffer.from(data);
+    buf.toString('hex').should.equal('1500000000000000');
+
+    data = _.packers['uint64b'](orig);
+    buf = Buffer.from(data);
+    buf.toString('hex').should.equal('0000000000000015');
+    const actual = _.unpackers['uint64b']({ offset: 0 },buf);
     actual.should.equal(orig);
   });
 

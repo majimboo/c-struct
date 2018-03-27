@@ -8,7 +8,7 @@ A fast binary data packing &amp; unpacking library for node.js designed for mult
 What can it do?
 ---------------
 
-* 8, 16, 24, 32, 40 and 48 bit signed and unsigned integers.
+* 8, 16, 24, 32, 40, 48, (56 and 64*) bit unsigned integers.
 * String with length and null-terminated cstrings.
 * Boolean, nibble, float and double.
 * Big and little endianness.
@@ -129,6 +129,8 @@ Currently only unsigned values in little endian are supported
     _.type.uint32   // unsigned long
     _.type.uint40
     _.type.uint48
+    _.type.uint56
+    _.type.uint64
 
 You can also specify default values
 
@@ -138,6 +140,8 @@ You can also specify default values
     _.type.u32(777) // default value 777
     _.type.u40(666) // default value 666
     _.type.u48(555) // default value 555
+    _.type.u56(444) // default value 444
+    _.type.u64(333) // default value 333
 
 Configurations
 ----
